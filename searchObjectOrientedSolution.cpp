@@ -16,28 +16,44 @@ public:
         return result;
     }
 
-    void printToTerminal(const std::vector<std::string>& array) {
-        for (const auto& item : array) {
-            std::cout << item << std::endl;
-        }
-    }
-
-    static std::function<bool(const std::string&)> checkStringStartsWithAny(char startChar) {
-        return [startChar](const std::string& stringItem) {
-            return stringItem[0] == startChar;
-        };
-    }
-
 private:
     std::vector<std::string> strings;
 };
 
+class StringPrinter {
+public:
+    static void printToTerminal(const std::vector<std::string>& array) {
+        for (const auto& item : array) {
+            std::cout << item << std::endl;
+        }
+    }
+};
+
+class DifferentLetterFilter {
+public:
+    static std::function<bool(const std::string&)> checkStringStartsWithDifferentLetter(char startChar) {
+        return [startChar](const std::string& stringItem) {
+            return stringItem[0] == startChar; 
+        };
+    }
+};
+
+class StringFilterPrinter : public StringFilter, public StringPrinter {
+public:
+    using StringFilter::StringFilter;
+    using StringPrinter::printToTerminal;
+};
+
 int main() {
-    std::vector<std::string> strings = {"Hey", "World", "Am", "Hi", "ab"};
+    std::vector<std::string> strings = {"Hey", "World", "Amway", "Hi", "ab"};
+
+    StringFilterPrinter filterPrinter(strings);
     
-    StringFilter stringFilter(strings);
-    auto filteredResult = stringFilter.filter(StringFilter::checkStringStartsWithAny('W'));
-    stringFilter.printToTerminal(filteredResult);
+   
+    auto filteredResult = filterPrinter.filter(DifferentLetterFilter::checkStringStartsWithDifferentLetter('W'));
+
+    
+    filterPrinter.printToTerminal(filteredResult);
 
     return 0;
 }

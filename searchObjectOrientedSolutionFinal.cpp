@@ -1,55 +1,67 @@
 #include <iostream>
 #include <vector>
-#include <functional>
 
-class Filter {
+using namespace std;
+
+class StartsWithStrategy {
+private:
+    char startChar;
+
 public:
-    std::vector<std::string> result;
-    std::function<bool(const std::string&)> predicateFn;
+    void setStartChar(char key) {
+        startChar = key;
+    }
 
-    Filter(std::function<bool(const std::string&)> predicate) : predicateFn(predicate) {}
+    bool invokeStrategy(const string& stringItem) const {
+        return stringItem[0] == startChar;
+    }
+};
 
-    void filterInput(const std::vector<std::string>& inputStrings) {
-        for (const auto& item : inputStrings) {
-            if (predicateFn(item)) {
-                result.push_back(item);
+class StringListFilterController {
+private:
+    StartsWithStrategy strategy;
+
+public:
+    vector<string> filter(const vector<string>& stringList) const {
+        vector<string> result;
+        for (const auto& stringItem : stringList) {
+            if (strategy.invokeStrategy(stringItem)) {
+                result.push_back(stringItem);
             }
         }
-    }
-
-    std::vector<std::string> getResult() const {
         return result;
     }
-};
 
-class IO {
-public:
-    void printArrayToTerminal(const std::vector<std::string>& array) {
-        for (const auto& item : array) {
-            std::cout << item << std::endl;
-        }
+    void setStrategyStartChar(char key) {
+        strategy.setStartChar(key);
     }
 };
 
-class Predicate {
+class ConsoleDisplayController {
+private:
+    string content;
+
 public:
-    static std::function<bool(const std::string&)> checkStringStartsWithAny(char startChar) {
-        return [startChar](const std::string& stringItem) {
-            return stringItem[0] == startChar;
-        };
+    void setContent(const vector<string>& messages) {
+        for (const auto& message : messages) {
+            content += message + "\n";
+        }
+    }
+
+    void display() const {
+        cout << content;
     }
 };
 
 int main() {
-    std::vector<std::string> strings = {"Hey", "World", "Amway", "Heya", "a"};
+    vector<string> strings = {"Hey", "Work", "Happy", "Amway", "ab"};
 
-    Predicate predicateObject;
-    Filter filterObject(Predicate::checkStringStartsWithAny('A'));
-    IO iObject;
+    ConsoleDisplayController displayObject;
+    StringListFilterController filterObject;
 
-    filterObject.filterInput(strings);
-    auto filteredResult = filterObject.getResult();
-    iObject.printArrayToTerminal(filteredResult);
+    filterObject.setStrategyStartChar('W');
+    displayObject.setContent(filterObject.filter(strings));
+    displayObject.display();
 
     return 0;
 }

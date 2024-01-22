@@ -12,6 +12,7 @@ namespace DeviceValidatorAssignment
             deviceObj.Code = 5;
             deviceObj.Description = "Good toy to play with";
             deviceObj.CustomProperty = "ABC Custom Value";
+            deviceObj.Barcode = "Z123456789012"; // Example barcode
             
             List<string> errors;
             bool isValid = ObjectValidator.Validate(deviceObj, out errors);

@@ -13,14 +13,16 @@ namespace DeviceValidatorAssignment
 
             PropertyInfo[] properties = typeof(T).GetProperties();
 
-            foreach (var property in properties)
+            foreach (PropertyInfo property in properties)
             {
-                var validationAttributes = property.GetCustomAttributes(typeof(ValidationAttribute), true);
+                object[] validationAttributes = property.GetCustomAttributes(typeof(ValidationAttribute), true);
 
-                foreach (var attribute in validationAttributes)
+                foreach (object attribute in validationAttributes)
                 {
-                    if (attribute is ValidationAttribute validationAttribute)
+                    if (attribute is ValidationAttribute)
                     {
+                        ValidationAttribute validationAttribute = (ValidationAttribute)attribute;
+
                         var validationResult = validationAttribute.GetValidationResult(property.GetValue(obj), new ValidationContext(obj));
 
                         if (validationResult != ValidationResult.Success)

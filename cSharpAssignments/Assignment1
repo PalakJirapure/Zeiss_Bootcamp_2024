@@ -14,7 +14,7 @@ class Device
     public string Description { get; set; }
 }
 
-class ObjectValidator
+class DeviceValidator
 {
     public static bool Validate<T>(T obj, out List<string> errors)
     {
@@ -46,7 +46,7 @@ class Program
 
 
         List<string> errors;
-        bool isValid = ObjectValidator.Validate(deviceObj, out errors);
+        bool isValid = DeviceValidator.Validate(deviceObj, out errors);
 
         if (!isValid)
         {

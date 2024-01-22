@@ -1,30 +1,36 @@
-using System;
-
-[AttributeUsage(AttributeTargets.Property)]
-public class RequiredAttribute : Attribute
+﻿namespace Assessment_Device
 {
-}
+    using System;
 
-[AttributeUsage(AttributeTargets.Property)]
-public class RangeAttribute : Attribute
-{
-    public int Minimum { get; }
-    public int Maximum { get; }
-
-    public RangeAttribute(int minimum, int maximum)
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
+    class RequiredAttribute : Attribute
     {
-        Minimum = minimum;
-        Maximum = maximum;
+        public string ErrorMessage { get; set; }
     }
-}
 
-[AttributeUsage(AttributeTargets.Property)]
-public class MaxLengthAttribute : Attribute
-{
-    public int MaxLength { get; }
-
-    public MaxLengthAttribute(int maxLength)
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
+    class RangeAttribute : Attribute
     {
-        MaxLength = maxLength;
+        public int Min { get; }
+        public int Max { get; }
+        public string ErrorMessage { get; set; }
+
+        public RangeAttribute(int min, int max)
+        {
+            Min = min;
+            Max = max;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
+    class MaxLengthAttribute : Attribute
+    {
+        public int MaxLength { get; }
+        public string ErrorMessage { get; set; }
+
+        public MaxLengthAttribute(int maxLength)
+        {
+            MaxLength = maxLength;
+        }
     }
 }

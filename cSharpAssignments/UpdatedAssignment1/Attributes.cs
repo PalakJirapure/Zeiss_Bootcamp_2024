@@ -103,4 +103,12 @@ namespace DeviceValidatorAssignment
             return System.Text.RegularExpressions.Regex.IsMatch(stringValue, _pattern);
         }
     }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class BarcodePatternAttribute : PatternAttribute
+    {
+        public BarcodePatternAttribute() : base("^Z\\d{12}$")
+        {
+        }
+    }
 }

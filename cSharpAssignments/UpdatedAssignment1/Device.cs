@@ -18,3 +18,4 @@ namespace DeviceValidatorAssignment
         [CustomValidation("ABC", ErrorMessage = "CustomProperty must contain the parameter ABC.")]
         public string CustomProperty { get; set; }
     }
+}

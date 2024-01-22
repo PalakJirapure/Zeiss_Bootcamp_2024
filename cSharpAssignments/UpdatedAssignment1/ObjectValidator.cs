@@ -1,47 +1,37 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-public static class ObjectValidator
+namespace DeviceValidatorAssignment
 {
-    public static bool Validate<T>(T obj, out List<string> errors)
+    public static class ObjectValidator
     {
-        errors = new List<string>();
-
-        PropertyInfo[] properties = typeof(T).GetProperties();
-
-        foreach (var property in properties)
+        public static bool Validate<T>(T obj, out List<string> errors)
         {
-            if (property.GetCustomAttribute(typeof(RequiredAttribute)) != null)
+            errors = new List<string>();
+
+            PropertyInfo[] properties = typeof(T).GetProperties();
+
+            foreach (var property in properties)
             {
-                var value = property.GetValue(obj);
-                if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
+                var validationAttributes = property.GetCustomAttributes(typeof(ValidationAttribute), true);
+
+                foreach (var attribute in validationAttributes)
                 {
-                    errors.Add($"{property.Name} is required.");
+                    if (attribute is ValidationAttribute validationAttribute)
+                    {
+                        var validationResult = validationAttribute.GetValidationResult(property.GetValue(obj), new ValidationContext(obj));
+
+                        if (validationResult != ValidationResult.Success)
+                        {
+                            errors.Add(validationResult.ErrorMessage);
+                        }
+                    }
                 }
             }
 
-            if (property.GetCustomAttribute(typeof(RangeAttribute)) != null)
-            {
-                var rangeAttribute = (RangeAttribute)property.GetCustomAttribute(typeof(RangeAttribute));
-                var value = (int)property.GetValue(obj);
-                if (value < rangeAttribute.Minimum || value > rangeAttribute.Maximum)
-                {
-                    errors.Add($"{property.Name} must be within the range {rangeAttribute.Minimum}-{rangeAttribute.Maximum}.");
-                }
-            }
-
-            if (property.GetCustomAttribute(typeof(MaxLengthAttribute)) != null)
-            {
-                var maxLengthAttribute = (MaxLengthAttribute)property.GetCustomAttribute(typeof(MaxLengthAttribute));
-                var value = property.GetValue(obj) as string;
-                if (value != null && value.Length > maxLengthAttribute.MaxLength)
-                {
-                    errors.Add($"{property.Name} must have a maximum length of {maxLengthAttribute.MaxLength} characters.");
-                }
-            }
+            return errors.Count == 0;
         }
-
-        return errors.Count == 0;
     }
 }

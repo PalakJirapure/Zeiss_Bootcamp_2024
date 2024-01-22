@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+class Device
+{
+    [Required(ErrorMessage = "ID Property Requires Value")]
+    public string Id { get; set; }
+
+    [Range(10, 100, ErrorMessage = "Code Value Must Be Within 10-100")]
+    public int Code { get; set; }
+
+    [MaxLength(100, ErrorMessage = "Max of 100 Characters are allowed")]
+    public string Description { get; set; }
+}
+
+class ObjectValidator
+{
+    public static bool Validate<T>(T obj, out List<string> errors)
+    {
+        errors = new List<string>();
+        var validationResults = new List<ValidationResult>();
+        var context = new ValidationContext(obj);
+
+        bool isValid = Validator.TryValidateObject(obj, context, validationResults, true);
+
+        if (!isValid)
+        {
+            errors.AddRange(validationResults.Select(result => result.ErrorMessage));
+        }
+
+        return isValid;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Device deviceObj = new Device();
+
+
+        deviceObj.Id = "ABC123";
+        deviceObj.Code = 10;        
+        deviceObj.Description = "Good toy to play with";
+
+
+        List<string> errors;
+        bool isValid = ObjectValidator.Validate(deviceObj, out errors);
+
+        if (!isValid)
+        {
+            foreach (string item in errors)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        else
+        {
+            
+            Console.WriteLine("Toy is perfect!");
+        }
+    }
+}

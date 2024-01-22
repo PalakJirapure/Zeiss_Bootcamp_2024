@@ -23,8 +23,6 @@ namespace ObserverPatternExample
         source.SetCommand(command2);
         source.TriggerCommand();
  
-        source.SetCommand(command3);
-        source.TriggerCommand();
     }
 }
 }

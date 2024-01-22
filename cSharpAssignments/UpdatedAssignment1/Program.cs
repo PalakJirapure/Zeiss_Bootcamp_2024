@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 class Device
 {
@@ -20,7 +19,7 @@ class Program
     {
         Device deviceObj = new Device();
         deviceObj.Id = "31027INT";
-        deviceObj.Code = 10;
+        deviceObj.Code = 5;
         deviceObj.Description = "Good toy to play with";
         List<string> errors;
         bool isValid = ObjectValidator.Validate(deviceObj, out errors);

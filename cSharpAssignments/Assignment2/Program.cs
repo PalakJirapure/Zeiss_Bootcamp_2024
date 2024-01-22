@@ -3,26 +3,28 @@ using System;
 namespace ObserverPatternExample
 {
     class Program
+{
+    static void Main()
     {
-        static void Main()
-        {
-
-            Target target = new Target();
-            Target2 target2 = new Target2();
-
-            
-            Command command = new Command();
-            Source source = new Source();
-
-           
-            source.ExecuteCommand += (task) =>
-            {
-                
-                Console.WriteLine("Command received: " + task);
-            };
-
-           
-            source.TriggerCommand(command, "Task Executed", target, target2);
-        }
+        Target target = new Target();
+        Target2 target2 = new Target2();
+        
+ 
+        Source source = new Source();
+ 
+        Command command1 = new Command(target, "ExecuteTask");
+        Command command2 = new Command(target2, "DoTask");
+       
+ 
+        source.SetCommand(command1);
+ 
+        source.TriggerCommand();
+ 
+        source.SetCommand(command2);
+        source.TriggerCommand();
+ 
+        source.SetCommand(command3);
+        source.TriggerCommand();
     }
+}
 }

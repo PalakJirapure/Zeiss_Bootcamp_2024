@@ -58,7 +58,7 @@ class Program
         else
         {
             
-            Console.WriteLine("Toy is perfect!");
+            Console.WriteLine("All Perfect!");
         }
     }
 }

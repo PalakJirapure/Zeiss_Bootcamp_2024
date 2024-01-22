@@ -9,7 +9,6 @@ namespace ObserverPatternExample
         {
             Console.WriteLine(task);
 
-            // Invoke ExecuteTask method of each target using reflection
             foreach (var target in targets)
             {
                 Type targetType = target.GetType();

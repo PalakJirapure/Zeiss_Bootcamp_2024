@@ -17,5 +17,8 @@ namespace DeviceValidatorAssignment
 
         [CustomValidation("ABC", ErrorMessage = "CustomProperty must contain the parameter ABC.")]
         public string CustomProperty { get; set; }
+
+        [BarcodePattern(ErrorMessage = "Barcode must start with 'Z' followed by 12 digits.")]
+        public string Barcode { get; set; }
     }
 }

@@ -15,8 +15,10 @@ namespace ObserverPatternExample
                 MethodInfo method = targetType.GetMethod("ExecuteTask");
                 if (method != null)
                 {
-                    method.Invoke(target, null);
-                }
+                    if(method.ReturnType==typeof(void)&& method.GetParameters().Length == 0   )
+                    {
+                        method.Invoke(target, null);
+                    }
             }
         }
     }

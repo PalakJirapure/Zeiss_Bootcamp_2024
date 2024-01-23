@@ -15,7 +15,8 @@ namespace ObserverPatternExample
         Command command1 = new Command(target.ExecuteTask);
         Command command2 = new Command(target2.DoTask);
 
-        Command compositeCommand = System.Deligate.Combine(command1,command2) as Command;
+        //Command compositeCommand = System.Deligate.Combine(command1,command2) as Command;
+        Command compositeCommand = command1+command2;
         source.SetCommand(compositeCommand);
         source.TriggerCommand();
        

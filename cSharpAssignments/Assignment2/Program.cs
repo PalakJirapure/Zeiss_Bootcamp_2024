@@ -12,8 +12,8 @@ namespace ObserverPatternExample
  
         Source source = new Source();
  
-        Command command1 = new Command(target.executeTask);
-        Command command2 = new Command(target2.doTask);
+        Command command1 = new Command(target.ExecuteTask);
+        Command command2 = new Command(target2.DoTask);
        
  
         source.SetCommand(command1);

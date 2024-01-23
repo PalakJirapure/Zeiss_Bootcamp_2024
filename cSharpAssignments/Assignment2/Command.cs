@@ -1,7 +1,9 @@
 using System;
 using System.Reflection;
 
-public deligate void Command()
+//public deligate void Command()
+
+
 
 /* namespace ObserverPatternExample
 {

@@ -1,7 +1,8 @@
 using System;
 using System.Reflection;
+deligate void Command()
 
-namespace ObserverPatternExample
+/* namespace ObserverPatternExample
 {
     public class Command
     {
@@ -22,4 +23,4 @@ namespace ObserverPatternExample
             }
         }
     }
-}
+}*/

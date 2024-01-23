@@ -17,7 +17,6 @@ namespace ObserverPatternExample
        
  
         source.SetCommand(command1);
- 
         source.TriggerCommand();
  
         source.SetCommand(command2);

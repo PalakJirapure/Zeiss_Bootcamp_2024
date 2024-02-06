@@ -112,7 +112,7 @@ Objects interact with each other through various types of relationships. These r
 Inheritance represents an "is-a" relationship, where one class (subclass or derived class) inherits the properties and behaviors of another class (superclass or base class).
 Example: A "Car" class may inherit from a more general "Vehicle" class, signifying that a car is a type of vehicle.
 
-###### _"Has-a" Relationship (Composition):_
+###### _"Has-a" Relationship (Association):_
 
 Composition represents a "has-a" relationship, where one class contains an instance of another class as a member variable.
 Example: A "Car" class may contain instances of "Engine," "Wheel," and "Seat" classes, indicating that a car has an engine, wheels, and seats.

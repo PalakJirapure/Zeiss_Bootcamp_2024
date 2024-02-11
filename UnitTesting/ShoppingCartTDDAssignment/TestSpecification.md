@@ -18,7 +18,7 @@
 
 9.**Given** a cart with six items A **When** calculating the total price **Then** the total price should be 260.(AAAAAA)
 
-10.**Given** a cart with items (ABCDE) **When** calculating the total price **Then** the total price should be 130.
+10.**Given** a cart with items (ABCD) **When** calculating the total price **Then** the total price should be 130.
 
 11.**Given** a cart with an invalid item E **When** calculating the total price **Then** an error (Invalid Item) should be raised.(E)
 

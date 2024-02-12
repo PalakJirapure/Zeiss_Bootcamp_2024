@@ -4,7 +4,7 @@
     
 2.**Given** a cart with a single item A **When** calculating the total price **Then** the total price should be 50.
 
-3.**Given** a cart with items A, B, and C **When** calculating the total price **Then** the total price should be 115.(ABC)
+3.**Given** a cart with items A, B, and C **When** calculating the total price **Then** the total price should be 100.(ABC)
 
 4.**Given** a cart with three items A **When** calculating the total price **Then** the total price should be 130.(AAA)
 
